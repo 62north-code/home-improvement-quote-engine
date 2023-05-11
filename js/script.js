@@ -5,6 +5,47 @@ const prevButtons = document.querySelectorAll(".prev");
 const contactForm = document.getElementById("contact-form");
 let windowConfigurations = [];
 
+window.addEventListener("load", () => {
+    const savedWindowConfigurations = localStorage.getItem(
+        "windowConfigurations"
+    );
+
+    if (savedWindowConfigurations) {
+        windowConfigurations = JSON.parse(savedWindowConfigurations);
+
+        // Display the loaded window configurations
+        windowConfigurations.forEach((config) => {
+            // Create a new summary element for the loaded configuration
+            const summaryElement = document.createElement("div");
+            summaryElement.id = `summary-${config.id}`; // Set the element ID
+            summaryElement.innerHTML = `
+                Window ID: ${config.id}<br>
+                Window Style: ${config.windowStyle}<br>
+                Dimensions: ${config.dimensions.width} x ${config.dimensions.height} mm<br>
+                External Frame Color: ${config.externalFrameColor}<br>
+                Internal Frame Color: ${config.internalFrameColor}<br>
+                Handle Color: ${config.handleColor}<br>
+                Glazing Style: ${config.glazingStyle}<br>
+                <button onclick="editWindow(${config.id})">Edit</button>
+                <button class="remove-window" data-window-id="${config.id}">Remove</button>
+                <hr>
+            `;
+
+            // Check if a summary with the same ID already exists
+            const existingSummary = document.getElementById(
+                `summary-${config.id}`
+            );
+            if (existingSummary) {
+                // Replace the existing summary
+                existingSummary.replaceWith(summaryElement);
+            } else {
+                // Append the new summary
+                document.getElementById("summary").appendChild(summaryElement);
+            }
+        });
+    }
+});
+
 let selectedOptions = {
     id: Date.now(),
     windowStyle: null,
@@ -296,6 +337,12 @@ function updateSummary() {
         // If no summary with the same ID exists, append the new summary
         document.getElementById("summary").appendChild(summaryElement);
     }
+
+    // Save the windowConfigurations to localStorage
+    localStorage.setItem(
+        "windowConfigurations",
+        JSON.stringify(windowConfigurations)
+    );
 }
 
 document.getElementById("summary").addEventListener("click", function (event) {
@@ -323,14 +370,26 @@ function removeWindow(windowId) {
     // If a window configuration was found, remove it from the array
     if (windowConfigIndex >= 0) {
         windowConfigurations.splice(windowConfigIndex, 1);
+
+        // Reset the selected options if the removed window was the last selected one
+        if (selectedOptions.id === windowId) {
+            resetSelectedOptions();
+        }
+
+        // Log that the configuration has been removed
+        console.log(
+            `Window configuration with ID ${windowId} has been removed.`
+        );
+
+        // Save the updated window configurations to localStorage
+        localStorage.setItem(
+            "windowConfigurations",
+            JSON.stringify(windowConfigurations)
+        );
     } else {
         console.error(
             `Could not find window configuration with ID ${windowId}`
         );
-    }
-
-    if (selectedOptions.id === windowId) {
-        resetSelectedOptions();
     }
 
     // Remove the corresponding summary element

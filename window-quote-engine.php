@@ -136,6 +136,7 @@ $windowGlazingStyles = get_field('window_glazing_styles', 'options');
             <div id="step5" class="step hidden">
                 <h2>Glazing Style</h2>
                 <div class="grid">
+
                 <?php foreach($windowGlazingStyles as $windowGlazingStyle): ?>
                         <?php $windowGlazingStyleName = $windowGlazingStyle['window_glazing_style']["window_glazing_style_name"]; ?>
                         <?php $windowGlazingStyleImageUrl = $windowGlazingStyle['window_glazing_style']["window_glazing_style_image"]['url']; ?>
@@ -144,6 +145,7 @@ $windowGlazingStyles = get_field('window_glazing_styles', 'options');
                             <p><?php echo $windowGlazingStyleName; ?></p>
                         </div>
                     <?php endforeach; ?>
+                    
                     <!-- Add more glazing styles as needed -->
                 </div>
                 <div class="validation-message"></div>
