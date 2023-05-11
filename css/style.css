@@ -200,3 +200,27 @@ body, html, button, input {
 button#configure-another-window {
   margin-right: 20px;
 }
+
+.quote-engine-selector-container {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+  grid-column-gap: 30px;
+  grid-row-gap: 30px;
+  padding: 50px;
+  }
+
+  .quote-engine-tile {
+    height: 200px;
+    background: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease-in-out;
+    cursor: pointer;
+}
+
+.quote-engine-tile:hover {
+  transform: scale(1.05);
+  opacity: 0.9;
+}
