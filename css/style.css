@@ -24,7 +24,10 @@ body, html, button, input {
     width: 50vw;
     background-position: center center !important;
     background-size: cover !important;
-  }
+    position: fixed;
+    right: 0;
+    top: 0;
+}
   
   /* Step container */
   .step {

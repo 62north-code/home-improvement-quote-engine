@@ -271,21 +271,21 @@ function updateSummary() {
     summaryElement.id = `summary-${windowId}`; // Set the element ID
     summaryElement.innerHTML = `
 
-      <span class="hidden-id">${
-          windowId !== null ? `Window ID: ${windowId}<br>` : ""
-      }</span>
-      Window Style: ${selectedOptions.windowStyle}<br>
-      Dimensions: ${selectedOptions.dimensions.width} x ${
+    <span class="hidden-id">${
+        windowId !== null ? `Window ID: ${windowId}<br>` : ""
+    }</span>
+    Window Style: ${selectedOptions.windowStyle}<br>
+    Dimensions: ${selectedOptions.dimensions.width} x ${
         selectedOptions.dimensions.height
     } mm<br>
-      External Frame Color: ${selectedOptions.externalFrameColor}<br>
-      Internal Frame Color: ${selectedOptions.internalFrameColor}<br>
-      Handle Color: ${selectedOptions.handleColor}<br>
-      Glazing Style: ${selectedOptions.glazingStyle}<br>
-      <button class="edit-window" data-window-id="${windowId}">Edit</button>
-
-      <hr>
-    `;
+    External Frame Color: ${selectedOptions.externalFrameColor}<br>
+    Internal Frame Color: ${selectedOptions.internalFrameColor}<br>
+    Handle Color: ${selectedOptions.handleColor}<br>
+    Glazing Style: ${selectedOptions.glazingStyle}<br>
+    <button class="edit-window" data-window-id="${windowId}">Edit</button>
+    <button class="remove-window" data-window-id="${windowId}">Remove</button>
+    <hr>
+  `;
 
     // Check if a summary with the same ID already exists
     const existingSummary = document.getElementById(`summary-${windowId}`);
@@ -299,11 +299,49 @@ function updateSummary() {
 }
 
 document.getElementById("summary").addEventListener("click", function (event) {
+    // If an 'Edit' button was clicked
     if (event.target.matches("button.edit-window")) {
         const windowId = event.target.dataset.windowId;
         editWindow(windowId);
     }
+    // If a 'Remove' button was clicked
+    else if (event.target.matches("button.remove-window")) {
+        const windowId = event.target.dataset.windowId;
+        removeWindow(windowId);
+    }
 });
+
+function removeWindow(windowId) {
+    // Convert windowId to a number
+    windowId = Number(windowId);
+
+    // Find the window configuration by ID
+    const windowConfigIndex = windowConfigurations.findIndex(
+        (config) => Number(config.id) === windowId
+    );
+
+    // If a window configuration was found, remove it from the array
+    if (windowConfigIndex >= 0) {
+        windowConfigurations.splice(windowConfigIndex, 1);
+    } else {
+        console.error(
+            `Could not find window configuration with ID ${windowId}`
+        );
+    }
+
+    if (selectedOptions.id === windowId) {
+        resetSelectedOptions();
+    }
+
+    // Remove the corresponding summary element
+    const summaryElement = document.getElementById(`summary-${windowId}`);
+    if (summaryElement) {
+        summaryElement.remove();
+    }
+
+    // Log the updated window configurations
+    console.log("Updated window configurations:", windowConfigurations);
+}
 
 function editWindow(windowId) {
     // Find the window configuration by ID
@@ -437,6 +475,8 @@ contactForm.addEventListener("submit", (e) => {
                     response.status,
                     response.text
                 );
+                // After a successful email send, redirect to a new page
+                window.location.href = "https://www.example.com/success";
             },
             function (error) {
                 console.log("Failed...", error);

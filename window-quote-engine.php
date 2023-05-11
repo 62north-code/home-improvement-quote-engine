@@ -4,7 +4,7 @@ $windowStyles = get_field('window_style', 'options');
 $windowExternalFrameColors = get_field('window_external_frame_colors', 'options'); 
 $windowInternalFrameColors = get_field('window_internal_frame_colors', 'options'); 
 $windowHandleColors = get_field('window_handle_colors', 'options'); 
-
+$windowGlazingStyles = get_field('window_glazing_styles', 'options'); 
 ?>
 
     <div class="container">
@@ -136,18 +136,14 @@ $windowHandleColors = get_field('window_handle_colors', 'options');
             <div id="step5" class="step hidden">
                 <h2>Glazing Style</h2>
                 <div class="grid">
-                    <div class="glazing-style">
-                        <img src="https://via.placeholder.com/150" alt="Glazing Style 1">
-                        <p>Glazing Style 1</p>
-                    </div>
-                    <div class="glazing-style">
-                        <img src="https://via.placeholder.com/150" alt="Glazing Style 2">
-                        <p>Glazing Style 2</p>
-                    </div>
-                    <div class="glazing-style">
-                        <img src="https://via.placeholder.com/150" alt="Glazing Style 3">
-                        <p>Glazing Style 3</p>
-                    </div>
+                <?php foreach($windowGlazingStyles as $windowGlazingStyle): ?>
+                        <?php $windowGlazingStyleName = $windowGlazingStyle['window_glazing_style']["window_glazing_style_name"]; ?>
+                        <?php $windowGlazingStyleImageUrl = $windowGlazingStyle['window_glazing_style']["window_glazing_style_image"]['url']; ?>
+                        <div class="glazing-style">
+                            <img src="<?php echo $windowGlazingStyleImageUrl; ?>" alt="<?php echo $windowGlazingStyleName; ?>">
+                            <p><?php echo $windowGlazingStyleName; ?></p>
+                        </div>
+                    <?php endforeach; ?>
                     <!-- Add more glazing styles as needed -->
                 </div>
                 <div class="validation-message"></div>
