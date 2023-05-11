@@ -22,6 +22,18 @@ function product_configuration_app_enqueue_scripts() {
 }
 add_action('wp_enqueue_scripts', 'product_configuration_app_enqueue_scripts');
 
+if (function_exists('acf_add_local_field_group')) {
+    // Include ACF plugin files
+    include_once( ABSPATH . 'wp-content/plugins/advanced-custom-fields-pro/acf.php' );
+}
+
+// Import ACF field group
+add_filter('acf/settings/load_json', 'my_acf_json_load_point');
+function my_acf_json_load_point($paths) {
+    $paths[] = plugin_dir_path(__FILE__) . '/fields/window-fields.json';
+    return $paths;
+}
+
 //ACF Options Page
 if( function_exists('acf_add_options_page') ) {
     
