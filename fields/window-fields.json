@@ -3,6 +3,23 @@
     "title": "Window Quote Settings",
     "fields": [
         {
+            "key": "field_645d33663b63b",
+            "label": "Window Main Page General Settings",
+            "name": "",
+            "aria-label": "",
+            "type": "tab",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "placement": "left",
+            "endpoint": 1
+        },
+        {
             "key": "field_64552e027c4d2",
             "label": "Window Quote Engine Main Image",
             "name": "window_quote_engine_main_image",
@@ -26,6 +43,23 @@
             "max_size": "",
             "mime_types": "",
             "preview_size": "medium"
+        },
+        {
+            "key": "field_645d339be3ffa",
+            "label": "Window Style",
+            "name": "",
+            "aria-label": "",
+            "type": "tab",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "placement": "top",
+            "endpoint": 0
         },
         {
             "key": "field_645523eff7921",
@@ -116,6 +150,23 @@
             ]
         },
         {
+            "key": "field_645d33ac3efbc",
+            "label": "External Frame Colours",
+            "name": "",
+            "aria-label": "",
+            "type": "tab",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "placement": "top",
+            "endpoint": 0
+        },
+        {
             "key": "field_645524339829f",
             "label": "Window External Frame Colors",
             "name": "window_external_frame_colors",
@@ -202,6 +253,23 @@
                     "parent_repeater": "field_645524339829f"
                 }
             ]
+        },
+        {
+            "key": "field_645d33e93183b",
+            "label": "Internal Frame Colours",
+            "name": "",
+            "aria-label": "",
+            "type": "tab",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "placement": "top",
+            "endpoint": 0
         },
         {
             "key": "field_645528fa10c3a",
@@ -292,6 +360,23 @@
             ]
         },
         {
+            "key": "field_645d33fc3183c",
+            "label": "Handle Options",
+            "name": "",
+            "aria-label": "",
+            "type": "tab",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "placement": "top",
+            "endpoint": 0
+        },
+        {
             "key": "field_64552c250ebd5",
             "label": "Window Handle Colors",
             "name": "window_handle_colors",
@@ -378,6 +463,23 @@
                     "parent_repeater": "field_64552c250ebd5"
                 }
             ]
+        },
+        {
+            "key": "field_645d340a3183d",
+            "label": "Glazing Styles",
+            "name": "",
+            "aria-label": "",
+            "type": "tab",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "placement": "top",
+            "endpoint": 0
         },
         {
             "key": "field_645d227c6fa8c",
@@ -486,5 +588,5 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1683828632
+    "modified": 1683829830
 }
