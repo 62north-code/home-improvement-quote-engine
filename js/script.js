@@ -346,13 +346,8 @@ function updateSummary() {
 }
 
 document.getElementById("summary").addEventListener("click", function (event) {
-    // If an 'Edit' button was clicked
-    if (event.target.matches("button.edit-window")) {
-        const windowId = event.target.dataset.windowId;
-        editWindow(windowId);
-    }
     // If a 'Remove' button was clicked
-    else if (event.target.matches("button.remove-window")) {
+    if (event.target.matches("button.remove-window")) {
         const windowId = event.target.dataset.windowId;
         removeWindow(windowId);
     }
@@ -400,29 +395,6 @@ function removeWindow(windowId) {
 
     // Log the updated window configurations
     console.log("Updated window configurations:", windowConfigurations);
-}
-
-function editWindow(windowId) {
-    // Find the window configuration by ID
-    const windowConfig = windowConfigurations.find(
-        (config) => config.id == windowId
-    );
-
-    // If a window configuration was found, load it into selectedOptions and start the editing process
-    if (windowConfig) {
-        // Remove the corresponding summary element
-        const summaryElement = document.getElementById(`summary-${windowId}`);
-        if (summaryElement) {
-            summaryElement.remove();
-        }
-
-        selectedOptions = { ...windowConfig };
-        showStep(0);
-    } else {
-        console.error(
-            `Could not find window configuration with ID ${windowId}`
-        );
-    }
 }
 
 function resetSelectedOptions() {
