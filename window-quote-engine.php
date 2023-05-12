@@ -155,7 +155,7 @@ $windowGlazingStyles = get_field('window_glazing_styles', 'options');
                         </div>
                     </div>
                     <div class="button-container">
-                        <button id="configure-another-window">Configure Another Window</button>
+                        <button id="configure-another-window">Add Another Window</button>
                         <button class="submit-quote" type="submit">Submit</button>
                     </div>
                 </form>
@@ -164,10 +164,10 @@ $windowGlazingStyles = get_field('window_glazing_styles', 'options');
 
         <div class="image-side" style="background:url('<?php echo $windowQuoteEngineImage; ?>')">
             <div class="quote-engine-selector-container">
-                <div class="quote-engine-tile">Window Quote</div>
+                <!-- <div class="quote-engine-tile">Window Quote</div>
                 <div class="quote-engine-tile">Door Quote</div>
                 <div class="quote-engine-tile">Conservatory Quote</div>
-                <div class="quote-engine-tile">Replacement Conservatory Roof Quote</div>
+                <div class="quote-engine-tile">Replacement Conservatory Roof Quote</div> -->
             </div>
         </div>
     </div>

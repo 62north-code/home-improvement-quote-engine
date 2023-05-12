@@ -238,3 +238,11 @@ button#show-quote-btn {
 .form-field {
   width: 100%;
 }
+
+button.remove-window {
+  background: #c45d5d;
+  padding: 5px 10px;
+  border-radius: 5px;
+  color: white;
+  margin-top: 10px;
+}

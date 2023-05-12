@@ -5,6 +5,8 @@ const prevButtons = document.querySelectorAll(".prev");
 const contactForm = document.getElementById("contact-form");
 let windowConfigurations = [];
 
+window.addEventListener("load", (event) => {});
+
 function updateShowQuoteButton() {
     const showQuoteBtn = document.getElementById("show-quote-btn");
     if (windowConfigurations.length > 0) {
@@ -313,7 +315,13 @@ function showStep(stepIndex) {
 document.getElementById("next-step5").addEventListener("click", updateSummary);
 
 function updateSummary() {
-    const windowId = selectedOptions.id; // Get the current window ID
+    const windowId =
+        selectedOptions && selectedOptions.id ? selectedOptions.id : "";
+
+    // Check if the windowStyle in the selectedOptions object is null
+    if (selectedOptions.internalFrameColor === null) {
+        return; // If it is, exit the function early
+    }
 
     // Check if the window configuration already exists in the array
     const existingIndex = windowConfigurations.findIndex(
@@ -327,25 +335,28 @@ function updateSummary() {
         // Add the new window configuration to the array
         windowConfigurations.push({ ...selectedOptions });
     }
+
     const summaryElement = document.createElement("div");
 
     summaryElement.id = `summary-${windowId}`; // Set the element ID
-    summaryElement.innerHTML = `
+    const dimensions =
+        selectedOptions && selectedOptions.dimensions
+            ? `${selectedOptions.dimensions.width} x ${selectedOptions.dimensions.height}`
+            : "Not specified";
 
+    summaryElement.innerHTML = `
     <span class="hidden-id">${
         windowId !== null ? `Window ID: ${windowId}<br>` : ""
     }</span>
     Window Style: ${selectedOptions.windowStyle}<br>
-    Dimensions: ${selectedOptions.dimensions.width} x ${
-        selectedOptions.dimensions.height
-    } mm<br>
+    Dimensions: ${dimensions} mm<br>
     External Frame Color: ${selectedOptions.externalFrameColor}<br>
     Internal Frame Color: ${selectedOptions.internalFrameColor}<br>
     Handle Color: ${selectedOptions.handleColor}<br>
     Glazing Style: ${selectedOptions.glazingStyle}<br>
     <button class="remove-window" data-window-id="${windowId}">Remove</button>
     <hr>
-  `;
+    `;
 
     // Check if a summary with the same ID already exists
     const existingSummary = document.getElementById(`summary-${windowId}`);
@@ -362,6 +373,7 @@ function updateSummary() {
         "windowConfigurations",
         JSON.stringify(windowConfigurations)
     );
+    resetSelectedOptions();
 }
 
 document.getElementById("summary").addEventListener("click", function (event) {
@@ -389,8 +401,6 @@ function removeWindow(windowId) {
         console.log(
             `Window configuration with ID ${windowId} has been removed.`
         );
-
-        //resetSelectedOptions();
 
         let currentWindowID =
             windowConfigurations[windowConfigurations.length - 1].id;
