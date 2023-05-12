@@ -165,15 +165,27 @@ $windowGlazingStyles = get_field('window_glazing_styles', 'options');
                 </div>
 
                 <form id="contact-form">
-                    <div class="form-inline-container">
+                   
+                <div class="form-inline-container">
+                    <div class="form-field">
                         <label for="name">Name:</label>
                         <input type="text" id="name" name="name" class="form-input-half" placeholder="Name" required>
-                        <label for="email">Email:</label>
+                    </div>
+                    <div class="form-field">
+                        <label label for="email">Email:</label>
                         <input type="email" id="email" name="email" class="form-input-half" placeholder="Email" required>
                     </div>
-                    <label for="phone">Phone:</label>
-                    <input type="tel" id="phone" name="phone" class="form-input-whole" required>
-
+                </div>
+                <div class="form-inline-container">
+                    <div class="form-field">
+                        <label for="phone">Phone:</label>
+                        <input type="tel" id="phone" name="phone" class="form-input-whole" placeholder="Phone" required>
+                    </div>
+                    <div class="form-field">
+                        <label for="postcode">Postcode:</label>
+                        <input type="text" id="postcode" name="postcode" class="form-input-whole" placeholder="Postcode" required>
+                    </div>
+                </div>
                     <div class="button-container">
                         <button id="configure-another-window">Configure Another Window</button>
                         <button class="submit-quote" type="submit">Submit</button>
