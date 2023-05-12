@@ -58,16 +58,23 @@ window.addEventListener("load", () => {
     }
 });
 
-let selectedOptions = {
-    id: Date.now(),
-    windowStyle: null,
-    dimensions: null,
-    externalFrameColor: null,
-    internalFrameColor: null,
-    handleColor: null,
-    glazingStyle: null,
-    userInfo: null,
-};
+let selectedOptions;
+
+function initializeSelectedOptions() {
+    selectedOptions = {
+        id: Date.now(),
+        windowStyle: null,
+        dimensions: null,
+        externalFrameColor: null,
+        internalFrameColor: null,
+        handleColor: null,
+        glazingStyle: null,
+        userInfo: null,
+    };
+}
+
+// Call initializeSelectedOptions on page load
+window.onload = initializeSelectedOptions;
 
 // Add click event listeners to window styles, frame colors, and glazing styles
 document.querySelectorAll(".window-style").forEach((el) => {
@@ -383,7 +390,7 @@ function removeWindow(windowId) {
             `Window configuration with ID ${windowId} has been removed.`
         );
 
-        resetSelectedOptions();
+        //resetSelectedOptions();
 
         let currentWindowID =
             windowConfigurations[windowConfigurations.length - 1].id;
@@ -511,9 +518,10 @@ contactForm.addEventListener("submit", (e) => {
             "service_2unt24a",
             "template_o9wu516",
             {
-                name: "John Doe",
-                subject: "Window Quote Request",
-                email: "john@example.com",
+                type: "Window",
+                name: selectedOptions.userInfo.name,
+                email: selectedOptions.userInfo.email,
+                phone: selectedOptions.userInfo.phone,
                 message: message, // Insert the window configurations into the message
             },
             "SMAtirpg6hG7wZzBt"
