@@ -38,6 +38,7 @@ window.addEventListener("load", () => {
                 Internal Frame Color: ${config.internalFrameColor}<br>
                 Handle Color: ${config.handleColor}<br>
                 Glazing Style: ${config.glazingStyle}<br>
+                <button class="edit-window" data-window-id="${config.id}">Edit</button>
                 <button class="remove-window" data-window-id="${config.id}">Remove</button>
                 <hr>
             `;
@@ -288,9 +289,21 @@ document
 
 // Update the showStep function to populate the summary when step 6 is shown
 function showStep(stepIndex) {
+    // Load selectedOptions into form fields if on the first step
+    if (stepIndex === 0) {
+        loadFormFields(selectedOptions);
+    }
+
     steps.forEach((step, index) => {
         step.classList.toggle("hidden", index !== stepIndex);
     });
+}
+
+function loadFormFields(options) {
+    // Load options into form fields
+    // Replace 'formFieldId' with the actual IDs of your form fields
+    document.getElementById("width").value = options.dimensionsWidth;
+    document.getElementById("height").value = options.dimensionsHeight;
 }
 
 // Add a click event listener to update the summary when the button is clicked
@@ -327,6 +340,8 @@ function updateSummary() {
     Internal Frame Color: ${selectedOptions.internalFrameColor}<br>
     Handle Color: ${selectedOptions.handleColor}<br>
     Glazing Style: ${selectedOptions.glazingStyle}<br>
+
+    <button class="edit-window" data-window-id="${windowId}">Edit</button>
     <button class="remove-window" data-window-id="${windowId}">Remove</button>
     <hr>
   `;
@@ -349,12 +364,96 @@ function updateSummary() {
 }
 
 document.getElementById("summary").addEventListener("click", function (event) {
+    // If an 'Edit' button was clicked
+    if (event.target.matches("button.edit-window")) {
+        const windowId = event.target.dataset.windowId;
+        editWindow(windowId);
+    }
+
     // If a 'Remove' button was clicked
-    if (event.target.matches("button.remove-window")) {
+    else if (event.target.matches("button.remove-window")) {
         const windowId = event.target.dataset.windowId;
         removeWindow(windowId);
     }
 });
+
+document.addEventListener("DOMContentLoaded", function () {
+    document.querySelectorAll(".window-style img").forEach((img) => {
+        img.addEventListener("click", (event) => {
+            // Get the window style from the clicked image
+            const windowStyle = event.target.dataset.windowStyle;
+
+            // Update the selectedOptions with the clicked window style
+            selectedOptions.windowStyle = windowStyle;
+
+            // Log the updated selectedOptions
+            console.log("Selected window style:", selectedOptions.windowStyle);
+        });
+    });
+});
+
+document.addEventListener("DOMContentLoaded", function () {
+    document.querySelectorAll(".external-frame-color img").forEach((img) => {
+        img.addEventListener("click", (event) => {
+            // Get the window style from the clicked image
+            const externalFrameColor = event.target.dataset.windowStyle;
+
+            // Update the selectedOptions with the clicked window style
+            selectedOptions.externalFrameColor = externalFrameColor;
+
+            // Log the updated selectedOptions
+            console.log(
+                "Selected external frame color:",
+                selectedOptions.externalFrameColor
+            );
+        });
+    });
+});
+
+document.addEventListener("DOMContentLoaded", function () {
+    document.querySelectorAll(".internal-frame-color img").forEach((img) => {
+        img.addEventListener("click", (event) => {
+            // Get the window style from the clicked image
+            const internalFrameColor = event.target.dataset.windowStyle;
+
+            // Update the selectedOptions with the clicked window style
+            selectedOptions.internalFrameColor = internalFrameColor;
+
+            // Log the updated selectedOptions
+            console.log(
+                "Selected internal frame color:",
+                selectedOptions.internalFrameColor
+            );
+        });
+    });
+});
+
+function editWindow(windowId) {
+    // Convert windowId to a number
+    windowId = Number(windowId);
+
+    // Find the window configuration by ID
+    const windowConfig = windowConfigurations.find(
+        (config) => Number(config.id) === windowId
+    );
+
+    // If a window configuration was found, load it into selectedOptions
+    if (windowConfig) {
+        selectedOptions = { ...windowConfig };
+
+        // Log that the configuration has been loaded
+        console.log(
+            `Loaded window configuration with ID ${windowId} for editing.`
+        );
+
+        // Navigate to the first step
+        showStep(0);
+    } else {
+        console.error(
+            `Could not find window configuration with ID ${windowId}`
+        );
+    }
+}
 
 function removeWindow(windowId) {
     // Convert windowId to a number

@@ -19,7 +19,7 @@ $windowGlazingStyles = get_field('window_glazing_styles', 'options');
                         <?php $windowStyleName = $windowStyle['window_style']["window_style_name"]; ?>
                         <?php $windowStyleImageUrl = $windowStyle['window_style']["window_style_image"]['url']; ?>
                         <div class="window-style">
-                            <img src="<?php echo $windowStyleImageUrl; ?>" alt="<?php echo $windowStyleName; ?>">
+                            <img src="<?php echo $windowStyleImageUrl; ?>" alt="<?php echo $windowStyleName; ?>" data-window-style="<?php echo $windowStyleName; ?>">
                             <p><?php echo $windowStyleName; ?></p>
                         </div>
                     <?php endforeach; ?>
@@ -66,7 +66,7 @@ $windowGlazingStyles = get_field('window_glazing_styles', 'options');
                         <?php $windowExternalFrameColorName = $windowExternalFrameColor['window_external_frame_color']["window_external_frame_color_name"]; ?>
                         <?php $windowExternalFrameColorImageUrl = $windowExternalFrameColor['window_external_frame_color']["window_external_frame_color_swatch"]['url']; ?>
                         <div class="external-frame-color">
-                            <img src="<?php echo $windowExternalFrameColorImageUrl; ?>" alt="<?php echo $windowExternalFrameColorName; ?>">
+                            <img src="<?php echo $windowExternalFrameColorImageUrl; ?>" alt="<?php echo $windowExternalFrameColorName; ?>" data-external-frame-color="<?php echo $windowExternalFrameColorName; ?>">
                             <p><?php echo $windowExternalFrameColorName; ?></p>
                         </div>
                     <?php endforeach; ?>
@@ -93,7 +93,7 @@ $windowGlazingStyles = get_field('window_glazing_styles', 'options');
                         <?php $windowInternalFrameColorName = $windowInternalFrameColor['window_internal_frame_color']["window_internal_frame_color_name"]; ?>
                         <?php $windowInternalFrameColorImageUrl = $windowInternalFrameColor['window_internal_frame_color']["window_internal_frame_color_swatch"]['url']; ?>
                         <div class="internal-frame-color">
-                            <img src="<?php echo $windowInternalFrameColorImageUrl; ?>" alt="<?php echo $windowInternalFrameColorName; ?>">
+                            <img src="<?php echo $windowInternalFrameColorImageUrl; ?>" alt="<?php echo $windowInternalFrameColorName; ?>" data-internal-frame-color="<?php echo $windowInternalFrameColorName; ?>">
                             <p><?php echo $windowInternalFrameColorName; ?></p>
                         </div>
                     <?php endforeach; ?>
