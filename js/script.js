@@ -5,20 +5,17 @@ const prevButtons = document.querySelectorAll(".prev");
 const contactForm = document.getElementById("contact-form");
 let windowConfigurations = [];
 
-window.addEventListener("load", (event) => {});
-
-function updateShowQuoteButton() {
-    const showQuoteBtn = document.getElementById("show-quote-btn");
-    if (windowConfigurations.length > 0) {
-        showQuoteBtn.style.display = "block";
-        showQuoteBtn.onclick = () => {
-            showStep(6);
-            updateSummary();
-        };
-    } else {
-        showQuoteBtn.style.display = "none";
-    }
-}
+let selectedOptions = {
+    id: Date.now(),
+    windowStyle: null,
+    dimensionsWidth: null,
+    dimensionsHeight: null,
+    externalFrameColor: null,
+    internalFrameColor: null,
+    handleColor: null,
+    glazingStyle: null,
+    userInfo: null,
+};
 
 window.addEventListener("load", () => {
     const savedWindowConfigurations = localStorage.getItem(
@@ -27,7 +24,7 @@ window.addEventListener("load", () => {
 
     if (savedWindowConfigurations) {
         windowConfigurations = JSON.parse(savedWindowConfigurations);
-        updateShowQuoteButton();
+
         // Display the loaded window configurations
         windowConfigurations.forEach((config) => {
             // Create a new summary element for the loaded configuration
@@ -36,7 +33,7 @@ window.addEventListener("load", () => {
             summaryElement.innerHTML = `
                 Window ID: ${config.id}<br>
                 Window Style: ${config.windowStyle}<br>
-                Dimensions: ${config.dimensions.width} x ${config.dimensions.height} mm<br>
+                Dimensions: ${config.dimensionsWidth} x ${config.dimensionsHeight} mm<br>
                 External Frame Color: ${config.externalFrameColor}<br>
                 Internal Frame Color: ${config.internalFrameColor}<br>
                 Handle Color: ${config.handleColor}<br>
@@ -60,24 +57,6 @@ window.addEventListener("load", () => {
     }
 });
 
-let selectedOptions;
-
-function initializeSelectedOptions() {
-    selectedOptions = {
-        id: Date.now(),
-        windowStyle: null,
-        dimensions: null,
-        externalFrameColor: null,
-        internalFrameColor: null,
-        handleColor: null,
-        glazingStyle: null,
-        userInfo: null,
-    };
-}
-
-// Call initializeSelectedOptions on page load
-window.onload = initializeSelectedOptions;
-
 // Add click event listeners to window styles, frame colors, and glazing styles
 document.querySelectorAll(".window-style").forEach((el) => {
     el.addEventListener("click", () => {
@@ -94,17 +73,13 @@ document.querySelectorAll(".window-style").forEach((el) => {
 
 // Add input event listeners to dimensions
 document.getElementById("width").addEventListener("input", (e) => {
-    const width = e.target.value;
-    const height = document.getElementById("height").value;
-    selectedOptions.dimensions = { width, height };
-    console.log("Selected dimensions:", selectedOptions.dimensions);
+    selectedOptions.dimensionsWidth = e.target.value;
+    console.log("Selected width:", selectedOptions.dimensionsWidth);
 });
 
 document.getElementById("height").addEventListener("input", (e) => {
-    const height = e.target.value;
-    const width = document.getElementById("width").value;
-    selectedOptions.dimensions = { width, height };
-    console.log("Selected dimensions:", selectedOptions.dimensions);
+    selectedOptions.dimensionsHeight = e.target.value;
+    console.log("Selected height:", selectedOptions.dimensionsHeight);
 });
 
 // Add input event listeners to external frame colour
@@ -271,6 +246,7 @@ function handleNextButtonClick(stepIndex) {
 
         // If the next step is the first step, it means a new window configuration is being started
         if (stepIndex === 0) {
+            resetSelectedOptions();
             // Push the completed window configuration to windowConfigurations array
             if (selectedOptions.id !== null) {
                 const existingIndex = windowConfigurations.findIndex(
@@ -301,7 +277,13 @@ document
     .getElementById("configure-another-window")
     .addEventListener("click", () => {
         handleNextButtonClick(0);
-        updateShowQuoteButton();
+    });
+
+// Add a click event listener to the "Configure another window" button
+document
+    .getElementById("view-quote-summary-btn")
+    .addEventListener("click", () => {
+        showStep(6);
     });
 
 // Update the showStep function to populate the summary when step 6 is shown
@@ -315,13 +297,7 @@ function showStep(stepIndex) {
 document.getElementById("next-step5").addEventListener("click", updateSummary);
 
 function updateSummary() {
-    const windowId =
-        selectedOptions && selectedOptions.id ? selectedOptions.id : "";
-
-    // Check if the windowStyle in the selectedOptions object is null
-    if (selectedOptions.internalFrameColor === null) {
-        return; // If it is, exit the function early
-    }
+    const windowId = selectedOptions.id; // Get the current window ID
 
     // Check if the window configuration already exists in the array
     const existingIndex = windowConfigurations.findIndex(
@@ -335,28 +311,25 @@ function updateSummary() {
         // Add the new window configuration to the array
         windowConfigurations.push({ ...selectedOptions });
     }
-
     const summaryElement = document.createElement("div");
 
     summaryElement.id = `summary-${windowId}`; // Set the element ID
-    const dimensions =
-        selectedOptions && selectedOptions.dimensions
-            ? `${selectedOptions.dimensions.width} x ${selectedOptions.dimensions.height}`
-            : "Not specified";
-
     summaryElement.innerHTML = `
+
     <span class="hidden-id">${
         windowId !== null ? `Window ID: ${windowId}<br>` : ""
     }</span>
     Window Style: ${selectedOptions.windowStyle}<br>
-    Dimensions: ${dimensions} mm<br>
+    Dimensions: ${selectedOptions.dimensionsWidth} mm x ${
+        selectedOptions.dimensionsHeight
+    } mm<br>
     External Frame Color: ${selectedOptions.externalFrameColor}<br>
     Internal Frame Color: ${selectedOptions.internalFrameColor}<br>
     Handle Color: ${selectedOptions.handleColor}<br>
     Glazing Style: ${selectedOptions.glazingStyle}<br>
     <button class="remove-window" data-window-id="${windowId}">Remove</button>
     <hr>
-    `;
+  `;
 
     // Check if a summary with the same ID already exists
     const existingSummary = document.getElementById(`summary-${windowId}`);
@@ -373,7 +346,6 @@ function updateSummary() {
         "windowConfigurations",
         JSON.stringify(windowConfigurations)
     );
-    resetSelectedOptions();
 }
 
 document.getElementById("summary").addEventListener("click", function (event) {
@@ -396,24 +368,21 @@ function removeWindow(windowId) {
     // If a window configuration was found, remove it from the array
     if (windowConfigIndex >= 0) {
         windowConfigurations.splice(windowConfigIndex, 1);
-        console.log(windowConfigurations);
+
+        // Reset the selected options if the removed window was the last selected one
+        if (selectedOptions.id === windowId) {
+            resetSelectedOptions();
+        }
+
         // Log that the configuration has been removed
         console.log(
             `Window configuration with ID ${windowId} has been removed.`
         );
 
-        let currentWindowID =
-            windowConfigurations[windowConfigurations.length - 1].id;
-
-        // Filter out the current window configuration
-        const configurationsWithoutCurrent = windowConfigurations.filter(
-            (config) => Number(config.id) !== currentWindowID
-        );
-
         // Save the updated window configurations to localStorage
         localStorage.setItem(
             "windowConfigurations",
-            JSON.stringify(configurationsWithoutCurrent)
+            JSON.stringify(windowConfigurations)
         );
     } else {
         console.error(
@@ -429,15 +398,14 @@ function removeWindow(windowId) {
 
     // Log the updated window configurations
     console.log("Updated window configurations:", windowConfigurations);
-
-    updateShowQuoteButton();
 }
 
 function resetSelectedOptions() {
     selectedOptions = {
         id: null,
         windowStyle: null,
-        dimensions: null,
+        dimensionsWidth: null,
+        dimensionsHeight: null,
         externalFrameColor: null,
         internalFrameColor: null,
         handleColor: null,
@@ -471,40 +439,6 @@ contactForm.addEventListener("submit", (e) => {
         // Add the new window configuration
         windowConfigurations.push({ ...selectedOptions });
     }
-    // resetSelectedOptions();
-
-    // Clear the summary section
-    document.getElementById("summary").innerHTML = "";
-
-    // Update the summary section with all window configurations
-    windowConfigurations.forEach((config) => {
-        const summaryElement = document.createElement("div");
-        summaryElement.id = `summary-${config.id}`; // Set the element ID
-        summaryElement.innerHTML = `
-            Window ID: ${config.id}<br>
-            Window Style: ${config.windowStyle}<br>
-            Dimensions: ${config.dimensions.width} x ${config.dimensions.height} mm<br>
-            External Frame Color: ${config.externalFrameColor}<br>
-            Internal Frame Color: ${config.internalFrameColor}<br>
-            Handle Color: ${config.handleColor}<br>
-            Glazing Style: ${config.glazingStyle}<br>
-
-            <hr>
-        `;
-
-        // Check if a summary with the same ID already exists
-        const existingSummary = document.getElementById(`summary-${config.id}`);
-        if (existingSummary) {
-            // Replace the existing summary
-            existingSummary.replaceWith(summaryElement);
-        } else {
-            // Append the new summary
-            document.getElementById("summary").appendChild(summaryElement);
-        }
-    });
-
-    // Initialize EmailJS
-    emailjs.init("SMAtirpg6hG7wZzBt");
 
     // Format window configurations into a nicely formatted message
     const message = windowConfigurations
@@ -512,7 +446,7 @@ contactForm.addEventListener("submit", (e) => {
             return `
       Window ID: ${config.id}<br>
       Window Style: ${config.windowStyle}<br>
-      Dimensions: ${config.dimensions.width} x ${config.dimensions.height} mm<br>
+      Dimensions: ${config.dimensionsWidth} x ${config.dimensionsHeight} mm<br>
       External Frame Color: ${config.externalFrameColor}<br>
       Internal Frame Color: ${config.internalFrameColor}<br>
       Handle Color: ${config.handleColor}<br>
@@ -555,5 +489,4 @@ contactForm.addEventListener("submit", (e) => {
                 console.log("Failed...", error);
             }
         );
-    updateShowQuoteButton();
 });
