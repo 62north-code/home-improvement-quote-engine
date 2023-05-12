@@ -384,21 +384,26 @@ function removeWindow(windowId) {
     // If a window configuration was found, remove it from the array
     if (windowConfigIndex >= 0) {
         windowConfigurations.splice(windowConfigIndex, 1);
-
-        // Reset the selected options if the removed window was the last selected one
-        if (selectedOptions.id === windowId) {
-            resetSelectedOptions();
-        }
-
+        console.log(windowConfigurations);
         // Log that the configuration has been removed
         console.log(
             `Window configuration with ID ${windowId} has been removed.`
         );
 
+        resetSelectedOptions();
+
+        let currentWindowID =
+            windowConfigurations[windowConfigurations.length - 1].id;
+
+        // Filter out the current window configuration
+        const configurationsWithoutCurrent = windowConfigurations.filter(
+            (config) => Number(config.id) !== currentWindowID
+        );
+
         // Save the updated window configurations to localStorage
         localStorage.setItem(
             "windowConfigurations",
-            JSON.stringify(windowConfigurations)
+            JSON.stringify(configurationsWithoutCurrent)
         );
     } else {
         console.error(
