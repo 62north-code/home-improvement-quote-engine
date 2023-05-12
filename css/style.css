@@ -228,3 +228,13 @@ button#configure-another-window {
 button#show-quote-btn {
   margin-right: 20px;
 }
+
+.form-inline-container {
+  display: flex;
+  width: 100%;
+  column-gap: 30px;
+}
+
+.form-field {
+  width: 100%;
+}
