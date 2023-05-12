@@ -117,7 +117,7 @@ $windowGlazingStyles = get_field('window_glazing_styles', 'options');
                         <?php $windowHandleColorName = $windowHandleColor['window_handle_color']["window_handle_color_name"]; ?>
                         <?php $windowHandleColorImageUrl = $windowHandleColor['window_handle_color']["window_handle_color_swatch"]['url']; ?>
                         <div class="handle-color">
-                            <img src="<?php echo $windowHandleColorImageUrl; ?>" alt="<?php echo $windowHandleColorName; ?>">
+                            <img src="<?php echo $windowHandleColorImageUrl; ?>" alt="<?php echo $windowHandleColorName; ?>" data-handle-color="<?php echo $windowHandleColorName; ?>">
                             <p><?php echo $windowHandleColorName; ?></p>
                         </div>
                     <?php endforeach; ?>
@@ -142,7 +142,7 @@ $windowGlazingStyles = get_field('window_glazing_styles', 'options');
                         <?php $windowGlazingStyleName = $windowGlazingStyle['window_glazing_style']["window_glazing_style_name"]; ?>
                         <?php $windowGlazingStyleImageUrl = $windowGlazingStyle['window_glazing_style']["window_glazing_style_image"]['url']; ?>
                         <div class="glazing-style">
-                            <img src="<?php echo $windowGlazingStyleImageUrl; ?>" alt="<?php echo $windowGlazingStyleName; ?>">
+                            <img src="<?php echo $windowGlazingStyleImageUrl; ?>" alt="<?php echo $windowGlazingStyleName; ?>" data-glazing-style="<?php echo $windowGlazingStyleName; ?>">
                             <p><?php echo $windowGlazingStyleName; ?></p>
                         </div>
                     <?php endforeach; ?>

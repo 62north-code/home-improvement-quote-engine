@@ -441,6 +441,97 @@ function editWindow(windowId) {
     if (windowConfig) {
         selectedOptions = { ...windowConfig };
 
+        // Get all window style images
+        const windowStyleImages = document.querySelectorAll(
+            "img[data-window-style]"
+        );
+
+        // Remove 'selected' class from all window style divs
+        windowStyleImages.forEach((img) => {
+            img.parentNode.classList.remove("selected");
+        });
+
+        // Loop over images and add 'selected' class to the div that matches the window style in selectedOptions
+        windowStyleImages.forEach((img) => {
+            if (img.dataset.windowStyle === selectedOptions.windowStyle) {
+                img.parentNode.classList.add("selected");
+            }
+        });
+
+        // Get all external frame color images
+        const externalFrameColorImages = document.querySelectorAll(
+            "img[data-external-frame-color]"
+        );
+
+        // Remove 'selected' class from all external frame color divs
+        externalFrameColorImages.forEach((img) => {
+            img.parentNode.classList.remove("selected");
+        });
+
+        // Loop over images and add 'selected' class to the div that matches the external frame color in selectedOptions
+        externalFrameColorImages.forEach((img) => {
+            if (
+                img.dataset.externalFrameColor ===
+                selectedOptions.externalFrameColor
+            ) {
+                img.parentNode.classList.add("selected");
+            }
+        });
+
+        // Get all internal frame color images
+        const internalFrameColorImages = document.querySelectorAll(
+            "img[data-internal-frame-color]"
+        );
+
+        // Remove 'selected' class from all external frame color divs
+        internalFrameColorImages.forEach((img) => {
+            img.parentNode.classList.remove("selected");
+        });
+
+        // Loop over images and add 'selected' class to the div that matches the external frame color in selectedOptions
+        internalFrameColorImages.forEach((img) => {
+            if (
+                img.dataset.internalFrameColor ===
+                selectedOptions.externalFrameColor
+            ) {
+                img.parentNode.classList.add("selected");
+            }
+        });
+
+        // Get all internal frame color images
+        const handleColorImages = document.querySelectorAll(
+            "img[data-handle-color]"
+        );
+
+        // Remove 'selected' class from all external frame color divs
+        handleColorImages.forEach((img) => {
+            img.parentNode.classList.remove("selected");
+        });
+
+        // Loop over images and add 'selected' class to the div that matches the external frame color in selectedOptions
+        handleColorImages.forEach((img) => {
+            if (img.dataset.handleColor === selectedOptions.handleColor) {
+                img.parentNode.classList.add("selected");
+            }
+        });
+
+        // Get all internal frame color images
+        const glazingStyleImages = document.querySelectorAll(
+            "img[data-glazing-style]"
+        );
+
+        // Remove 'selected' class from all external frame color divs
+        glazingStyleImages.forEach((img) => {
+            img.parentNode.classList.remove("selected");
+        });
+
+        // Loop over images and add 'selected' class to the div that matches the external frame color in selectedOptions
+        glazingStyleImages.forEach((img) => {
+            if (img.dataset.glazingStyle === selectedOptions.glazingStyle) {
+                img.parentNode.classList.add("selected");
+            }
+        });
+
         // Log that the configuration has been loaded
         console.log(
             `Loaded window configuration with ID ${windowId} for editing.`
@@ -453,6 +544,20 @@ function editWindow(windowId) {
             `Could not find window configuration with ID ${windowId}`
         );
     }
+}
+
+function updateSelection(attribute, option) {
+    // Get all attribute images
+    const attributeImages = document.querySelectorAll(`img[data-${attribute}]`);
+
+    // Remove 'selected' class from all attribute divs and add 'selected' class to the div that matches the option
+    attributeImages.forEach((img) => {
+        img.parentNode.classList.remove("selected");
+
+        if (img.dataset[attribute] === option) {
+            img.parentNode.classList.add("selected");
+        }
+    });
 }
 
 function removeWindow(windowId) {
