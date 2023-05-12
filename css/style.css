@@ -224,3 +224,7 @@ button#configure-another-window {
   transform: scale(1.05);
   opacity: 0.9;
 }
+
+button#view-quote-summary-btn {
+  margin-right: 20px;
+}

@@ -28,6 +28,7 @@ $windowGlazingStyles = get_field('window_glazing_styles', 'options');
                 <div class="validation-message"></div>
 
                 <div class="button-container">
+                    <button id="view-quote-summary-btn">View My Quote Summary</button>
                     <button class="next">Next</button>
                 </div>
 

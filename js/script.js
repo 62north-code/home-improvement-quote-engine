@@ -26,7 +26,6 @@ window.addEventListener("load", () => {
                 Internal Frame Color: ${config.internalFrameColor}<br>
                 Handle Color: ${config.handleColor}<br>
                 Glazing Style: ${config.glazingStyle}<br>
-                <button onclick="editWindow(${config.id})">Edit</button>
                 <button class="remove-window" data-window-id="${config.id}">Remove</button>
                 <hr>
             `;
@@ -279,7 +278,14 @@ function handleNextButtonClick(stepIndex) {
 document
     .getElementById("configure-another-window")
     .addEventListener("click", () => {
-        handleNextButtonClick(0);
+        showStep(0);
+    });
+
+// Add a click event listener to the "Configure another window" button
+document
+    .getElementById("view-quote-summary-btn")
+    .addEventListener("click", () => {
+        showStep(6);
     });
 
 // Update the showStep function to populate the summary when step 6 is shown
@@ -323,7 +329,6 @@ function updateSummary() {
     Internal Frame Color: ${selectedOptions.internalFrameColor}<br>
     Handle Color: ${selectedOptions.handleColor}<br>
     Glazing Style: ${selectedOptions.glazingStyle}<br>
-    <button class="edit-window" data-window-id="${windowId}">Edit</button>
     <button class="remove-window" data-window-id="${windowId}">Remove</button>
     <hr>
   `;
@@ -452,7 +457,6 @@ contactForm.addEventListener("submit", (e) => {
             Internal Frame Color: ${config.internalFrameColor}<br>
             Handle Color: ${config.handleColor}<br>
             Glazing Style: ${config.glazingStyle}<br>
-            <button onclick="editWindow(${config.id})">Edit</button>
             <hr>
         `;
 
@@ -492,9 +496,11 @@ contactForm.addEventListener("submit", (e) => {
             "service_2unt24a",
             "template_o9wu516",
             {
-                name: "John Doe",
-                subject: "Window Quote Request",
-                email: "john@example.com",
+                type: "Window",
+                name: selectedOptions.userInfo.name,
+                email: selectedOptions.userInfo.email,
+                phone: selectedOptions.userInfo.phone,
+                postcode: selectedOptions.userInfo.postcode,
                 message: message, // Insert the window configurations into the message
             },
             "SMAtirpg6hG7wZzBt"
