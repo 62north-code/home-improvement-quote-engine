@@ -5,6 +5,19 @@ const prevButtons = document.querySelectorAll(".prev");
 const contactForm = document.getElementById("contact-form");
 let windowConfigurations = [];
 
+function updateShowQuoteButton() {
+    const showQuoteBtn = document.getElementById("show-quote-btn");
+    if (windowConfigurations.length > 0) {
+        showQuoteBtn.style.display = "block";
+        showQuoteBtn.onclick = () => {
+            showStep(6);
+            updateSummary();
+        };
+    } else {
+        showQuoteBtn.style.display = "none";
+    }
+}
+
 window.addEventListener("load", () => {
     const savedWindowConfigurations = localStorage.getItem(
         "windowConfigurations"
@@ -12,7 +25,7 @@ window.addEventListener("load", () => {
 
     if (savedWindowConfigurations) {
         windowConfigurations = JSON.parse(savedWindowConfigurations);
-
+        updateShowQuoteButton();
         // Display the loaded window configurations
         windowConfigurations.forEach((config) => {
             // Create a new summary element for the loaded configuration
@@ -280,6 +293,7 @@ document
     .getElementById("configure-another-window")
     .addEventListener("click", () => {
         handleNextButtonClick(0);
+        updateShowQuoteButton();
     });
 
 // Update the showStep function to populate the summary when step 6 is shown
@@ -400,6 +414,8 @@ function removeWindow(windowId) {
 
     // Log the updated window configurations
     console.log("Updated window configurations:", windowConfigurations);
+
+    updateShowQuoteButton();
 }
 
 function editWindow(windowId) {
@@ -415,7 +431,6 @@ function editWindow(windowId) {
         if (summaryElement) {
             summaryElement.remove();
         }
-
         selectedOptions = { ...windowConfig };
         showStep(0);
     } else {
@@ -534,11 +549,16 @@ contactForm.addEventListener("submit", (e) => {
                     response.status,
                     response.text
                 );
-                // After a successful email send, redirect to a new page
+                // After a successful email send, clear the localStorage and reset arrays and objects
+                localStorage.removeItem("windowConfigurations"); // Clear localStorage
+                windowConfigurations.splice(0, windowConfigurations.length); // Clear array
+                resetSelectedOptions(); // Clear selectedOptions object
+                // Redirect to a new page
                 window.location.href = "https://www.example.com/success";
             },
             function (error) {
                 console.log("Failed...", error);
             }
         );
+    updateShowQuoteButton();
 });
