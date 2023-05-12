@@ -141,7 +141,9 @@ $windowGlazingStyles = get_field('window_glazing_styles', 'options');
                         <input type="email" id="email" name="email" class="form-input-half" placeholder="Email" required>
                     </div>
                     <label for="phone">Phone:</label>
-                    <input type="tel" id="phone" name="phone" class="form-input-whole" required>
+                    <input type="tel" id="phone" name="phone" class="form-input-whole" placeholder="Phone" required>
+                    <label for="postcode">Postcode:</label>
+                    <input type="text" id="postcode" name="postcode" class="form-input-whole" placeholder="Postcode" required>
                     <div class="button-container">
                         <button id="configure-another-window">Configure Another Window</button>
                         <button class="submit-quote" type="submit">Submit</button>

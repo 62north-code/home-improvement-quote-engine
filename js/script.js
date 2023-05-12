@@ -522,6 +522,7 @@ contactForm.addEventListener("submit", (e) => {
                 name: selectedOptions.userInfo.name,
                 email: selectedOptions.userInfo.email,
                 phone: selectedOptions.userInfo.phone,
+                postcode: selectedOptions.userInfo.postcode,
                 message: message, // Insert the window configurations into the message
             },
             "SMAtirpg6hG7wZzBt"
@@ -538,7 +539,7 @@ contactForm.addEventListener("submit", (e) => {
                 windowConfigurations.splice(0, windowConfigurations.length); // Clear array
                 resetSelectedOptions(); // Clear selectedOptions object
                 // Redirect to a new page
-                window.location.href = "https://www.example.com/success";
+                window.location.href = "/success";
             },
             function (error) {
                 console.log("Failed...", error);
