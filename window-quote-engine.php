@@ -28,7 +28,7 @@ $windowGlazingStyles = get_field('window_glazing_styles', 'options');
                 <div class="validation-message"></div>
 
                 <div class="button-container">
-                    <button id="view-quote-summary-btn">View My Quote Summary</button>
+                    <button id="view-quote-summary-btn" style="display:none;">View My Quote Summary</button>
                     <button class="next">Next</button>
                 </div>
 
@@ -185,7 +185,10 @@ $windowGlazingStyles = get_field('window_glazing_styles', 'options');
                         <label for="postcode">Postcode:</label>
                         <input type="text" id="postcode" name="postcode" class="form-input-whole" placeholder="Postcode" required>
                     </div>
+
                 </div>
+
+
                     <div class="button-container">
                         <button id="configure-another-window">Configure Another Window</button>
                         <button class="submit-quote" type="submit">Submit</button>
@@ -197,10 +200,10 @@ $windowGlazingStyles = get_field('window_glazing_styles', 'options');
 
         <div class="image-side" style="background:url('<?php echo $windowQuoteEngineImage; ?>')">
             <div class="quote-engine-selector-container">
-                <div class="quote-engine-tile">Window Quote</div>
-                <div class="quote-engine-tile">Door Quote</div>
-                <div class="quote-engine-tile">Conservatory Quote</div>
-                <div class="quote-engine-tile">Replacement Conservatory Roof Quote</div>
+                <div class="quote-engine-tile">Add Windows To Your Quote</div>
+                <div class="quote-engine-tile">Add Doors To Your Quote</div>
+                <div class="quote-engine-tile">Add a Conservatory To Your Quote</div>
+                <div class="quote-engine-tile">Add Replacement Conservatory Roofing To Your Quote</div>
             </div>
         </div>
     </div>

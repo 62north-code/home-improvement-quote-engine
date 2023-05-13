@@ -218,6 +218,8 @@ padding: 50px;
   justify-content: center;
   transition: all 0.3s ease-in-out;
   cursor: pointer;
+  text-align: center;
+  padding: 20px;
 }
 
 .quote-engine-tile:hover {

@@ -290,7 +290,6 @@ document
     .getElementById("view-quote-summary-btn")
     .addEventListener("click", () => {
         showStep(6);
-        checkWindowConfigurations(windowConfigurations);
     });
 
 // Update the showStep function to populate the summary when step 6 is shown
@@ -623,13 +622,24 @@ function checkWindowConfigurations(windowConfigurations) {
         document.getElementById("view-quote-summary-btn").style.display =
             "none";
         //console.log("button hidden");
+        document.getElementById("configure-another-window").style.display =
+            "none";
+        //console.log("configure more button hidden");
     } else {
         document.getElementById("no-config-windows-msg").style.display = "none";
         //console.log("warning hidden");
         document.getElementById("view-quote-summary-btn").style.display =
             "block";
+        //console.log("button visible");
+        document.getElementById("configure-another-window").style.display =
+            "block";
+        //console.log("configure more button visable");
     }
 }
+
+window.addEventListener("load", (event) => {
+    checkWindowConfigurations(windowConfigurations);
+});
 
 function resetSelectedOptions() {
     selectedOptions = {
