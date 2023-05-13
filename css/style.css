@@ -238,3 +238,9 @@ column-gap: 30px;
 .form-field {
 width: 100%;
 }
+
+span#inline-begin {
+  font-weight: 700;
+  text-decoration: underline;
+  cursor: pointer;
+}

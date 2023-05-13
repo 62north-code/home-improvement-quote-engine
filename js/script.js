@@ -18,6 +18,7 @@ let selectedOptions = {
 };
 
 window.addEventListener("load", () => {
+    checkWindowConfigurations(windowConfigurations);
     const savedWindowConfigurations = localStorage.getItem(
         "windowConfigurations"
     );
@@ -279,6 +280,10 @@ document
     .addEventListener("click", () => {
         handleNextButtonClick(0);
     });
+
+document.getElementById("inline-begin").addEventListener("click", () => {
+    handleNextButtonClick(0);
+});
 
 // Add a click event listener to the "Configure another window" button
 document
@@ -615,9 +620,14 @@ function checkWindowConfigurations(windowConfigurations) {
         document.getElementById("no-config-windows-msg").style.display =
             "block";
         //console.log("warning visible");
+        document.getElementById("view-quote-summary-btn").style.display =
+            "none";
+        //console.log("button hidden");
     } else {
         document.getElementById("no-config-windows-msg").style.display = "none";
         //console.log("warning hidden");
+        document.getElementById("view-quote-summary-btn").style.display =
+            "block";
     }
 }
 

@@ -160,8 +160,8 @@ $windowGlazingStyles = get_field('window_glazing_styles', 'options');
             <div id="step6" class="step hidden">
 
                 <div id="summary">
-                    <h3>Your Window Summary</h3>
-                    <p id="no-config-windows-msg">You have no configured Windows</p>
+                    <h3>Your Quote Summary</h3>
+                    <p id="no-config-windows-msg">You have no configured Windows<br><span id="inline-begin">Click Here To Start</span></p>
                 </div>
 
                 <form id="contact-form">
