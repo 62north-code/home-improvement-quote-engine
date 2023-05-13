@@ -21,6 +21,7 @@ $windowGlazingStyles = get_field('window_glazing_styles', 'options');
                         <div class="window-style">
                             <img src="<?php echo $windowStyleImageUrl; ?>" alt="<?php echo $windowStyleName; ?>" data-window-style="<?php echo $windowStyleName; ?>">
                             <p><?php echo $windowStyleName; ?></p>
+                            <a class="product-find-out-more" href="#">Find Out More</a>
                         </div>
                     <?php endforeach; ?>
                 </div>
