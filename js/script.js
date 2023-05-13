@@ -285,6 +285,7 @@ document
     .getElementById("view-quote-summary-btn")
     .addEventListener("click", () => {
         showStep(6);
+        checkWindowConfigurations(windowConfigurations);
     });
 
 // Update the showStep function to populate the summary when step 6 is shown
@@ -307,7 +308,11 @@ function loadFormFields(options) {
 }
 
 // Add a click event listener to update the summary when the button is clicked
-document.getElementById("next-step5").addEventListener("click", updateSummary);
+
+document.getElementById("next-step5").addEventListener("click", function () {
+    updateSummary();
+    checkWindowConfigurations(windowConfigurations);
+});
 
 function updateSummary() {
     const windowId = selectedOptions.id; // Get the current window ID
@@ -602,6 +607,18 @@ function removeWindow(windowId) {
 
     // Log the updated window configurations
     console.log("Updated window configurations:", windowConfigurations);
+    checkWindowConfigurations(windowConfigurations);
+}
+
+function checkWindowConfigurations(windowConfigurations) {
+    if (windowConfigurations.length === 0) {
+        document.getElementById("no-config-windows-msg").style.display =
+            "block";
+        console.log("warning visible");
+    } else {
+        document.getElementById("no-config-windows-msg").style.display = "none";
+        console.log("warning hidden");
+    }
 }
 
 function resetSelectedOptions() {
