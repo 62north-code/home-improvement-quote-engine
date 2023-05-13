@@ -614,10 +614,10 @@ function checkWindowConfigurations(windowConfigurations) {
     if (windowConfigurations.length === 0) {
         document.getElementById("no-config-windows-msg").style.display =
             "block";
-        console.log("warning visible");
+        //console.log("warning visible");
     } else {
         document.getElementById("no-config-windows-msg").style.display = "none";
-        console.log("warning hidden");
+        //console.log("warning hidden");
     }
 }
 
