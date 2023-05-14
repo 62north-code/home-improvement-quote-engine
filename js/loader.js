@@ -4,19 +4,10 @@ document.addEventListener("DOMContentLoaded", function () {
             .getElementById(id)
             .addEventListener("click", async function () {
                 // Check for windowConfigurations in local storage
-                const windowConfigurations = localStorage.getItem(
+                const storedConfigs = localStorage.getItem(
                     "windowConfigurations"
                 );
-                if (windowConfigurations) {
-                    console.log(
-                        "Found windowConfigurations:",
-                        windowConfigurations
-                    );
-                    // Do something with windowConfigurations...
-                } else {
-                    console.log("No windowConfigurations found");
-                }
-
+                console.log(storedConfigs);
                 // Remove old script if it exists
                 const oldScript = document.getElementById("designerScript");
                 if (oldScript) {

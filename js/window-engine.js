@@ -19,6 +19,7 @@
     };
 
     window.addEventListener("load", () => {
+        console.log("loaded");
         checkWindowConfigurations(windowConfigurations);
         const savedWindowConfigurations = localStorage.getItem(
             "windowConfigurations"
