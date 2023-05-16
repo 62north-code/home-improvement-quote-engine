@@ -201,8 +201,8 @@ $windowGlazingStyles = get_field('window_glazing_styles', 'options');
 
         <div class="image-side" style="background:url('<?php echo $windowQuoteEngineImage; ?>')">
             <div class="quote-engine-selector-container">
-                <div class="quote-engine-tile">Add Windows To Your Quote</div>
-                <div class="quote-engine-tile">Add Doors To Your Quote</div>
+            <a href="/window-quote-engine"><div class="quote-engine-tile">Add Windows To Your Quote</div></a>
+                <a href="/door-quote-engine"><div class="quote-engine-tile">Add Doors To Your Quote</div></a>
                 <div class="quote-engine-tile">Add a Conservatory To Your Quote</div>
                 <div class="quote-engine-tile">Add Replacement Conservatory Roofing To Your Quote</div>
             </div>
