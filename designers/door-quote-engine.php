@@ -1,10 +1,10 @@
 <?php
-$windowQuoteEngineImage = get_field('window_quote_engine_main_image', 'options');
-$windowStyles = get_field('window_style', 'options'); 
-$windowExternalFrameColors = get_field('window_external_frame_colors', 'options'); 
-$windowInternalFrameColors = get_field('window_internal_frame_colors', 'options'); 
-$windowHandleColors = get_field('window_handle_colors', 'options'); 
-$windowGlazingStyles = get_field('window_glazing_styles', 'options'); 
+$doorQuoteEngineImage = get_field('door_quote_engine_main_image', 'options');
+$doorStyles = get_field('door_style', 'options'); 
+$doorExternalFrameColors = get_field('door_external_frame_colors', 'options'); 
+$doorInternalFrameColors = get_field('door_internal_frame_colors', 'options'); 
+$doorHandleColors = get_field('door_handle_colors', 'options'); 
+$doorGlazingStyles = get_field('door_glazing_styles', 'options'); 
 ?>
 
     <div class="container">
@@ -15,12 +15,12 @@ $windowGlazingStyles = get_field('window_glazing_styles', 'options');
                 <h2>Door Style</h2>
 
                 <div class="grid">
-                    <?php foreach($windowStyles as $windowStyle): ?>
-                        <?php $windowStyleName = $windowStyle['window_style']["window_style_name"]; ?>
-                        <?php $windowStyleImageUrl = $windowStyle['window_style']["window_style_image"]['url']; ?>
-                        <div class="window-style">
-                            <img src="<?php echo $windowStyleImageUrl; ?>" alt="<?php echo $windowStyleName; ?>" data-window-style="<?php echo $windowStyleName; ?>">
-                            <p><?php echo $windowStyleName; ?></p>
+                    <?php foreach($doorStyles as $doorStyle): ?>
+                        <?php $doorStyleName = $doorStyle['door_style']["door_style_name"]; ?>
+                        <?php $doorStyleImageUrl = $doorStyle['door_style']["door_style_image"]['url']; ?>
+                        <div class="door-style">
+                            <img src="<?php echo $doorStyleImageUrl; ?>" alt="<?php echo $doorStyleName; ?>" data-door-style="<?php echo $doorStyleName; ?>">
+                            <p><?php echo $doorStyleName; ?></p>
                             <a class="product-find-out-more" href="#">Find Out More</a>
                         </div>
                     <?php endforeach; ?>
@@ -38,7 +38,7 @@ $windowGlazingStyles = get_field('window_glazing_styles', 'options');
 
             <div id="step2" class="step hidden">
 
-                <h2>Window Dimensions</h2>
+                <h2>door Dimensions</h2>
 
                 <div class="dimensions-container">
                     <label for="width">Width (mm):</label>
@@ -63,12 +63,12 @@ $windowGlazingStyles = get_field('window_glazing_styles', 'options');
 
                 <div class="grid">
 
-                    <?php foreach($windowExternalFrameColors as $windowExternalFrameColor): ?>
-                        <?php $windowExternalFrameColorName = $windowExternalFrameColor['window_external_frame_color']["window_external_frame_color_name"]; ?>
-                        <?php $windowExternalFrameColorImageUrl = $windowExternalFrameColor['window_external_frame_color']["window_external_frame_color_swatch"]['url']; ?>
+                    <?php foreach($doorExternalFrameColors as $doorExternalFrameColor): ?>
+                        <?php $doorExternalFrameColorName = $doorExternalFrameColor['door_external_frame_color']["door_external_frame_color_name"]; ?>
+                        <?php $doorExternalFrameColorImageUrl = $doorExternalFrameColor['door_external_frame_color']["door_external_frame_color_swatch"]['url']; ?>
                         <div class="external-frame-color">
-                            <img src="<?php echo $windowExternalFrameColorImageUrl; ?>" alt="<?php echo $windowExternalFrameColorName; ?>" data-external-frame-color="<?php echo $windowExternalFrameColorName; ?>">
-                            <p><?php echo $windowExternalFrameColorName; ?></p>
+                            <img src="<?php echo $doorExternalFrameColorImageUrl; ?>" alt="<?php echo $doorExternalFrameColorName; ?>" data-external-frame-color="<?php echo $doorExternalFrameColorName; ?>">
+                            <p><?php echo $doorExternalFrameColorName; ?></p>
                         </div>
                     <?php endforeach; ?>
 
@@ -90,12 +90,12 @@ $windowGlazingStyles = get_field('window_glazing_styles', 'options');
 
                 <div class="grid">
 
-                    <?php foreach($windowInternalFrameColors as $windowInternalFrameColor): ?>
-                        <?php $windowInternalFrameColorName = $windowInternalFrameColor['window_internal_frame_color']["window_internal_frame_color_name"]; ?>
-                        <?php $windowInternalFrameColorImageUrl = $windowInternalFrameColor['window_internal_frame_color']["window_internal_frame_color_swatch"]['url']; ?>
+                    <?php foreach($doorInternalFrameColors as $doorInternalFrameColor): ?>
+                        <?php $doorInternalFrameColorName = $doorInternalFrameColor['door_internal_frame_color']["door_internal_frame_color_name"]; ?>
+                        <?php $doorInternalFrameColorImageUrl = $doorInternalFrameColor['door_internal_frame_color']["door_internal_frame_color_swatch"]['url']; ?>
                         <div class="internal-frame-color">
-                            <img src="<?php echo $windowInternalFrameColorImageUrl; ?>" alt="<?php echo $windowInternalFrameColorName; ?>" data-internal-frame-color="<?php echo $windowInternalFrameColorName; ?>">
-                            <p><?php echo $windowInternalFrameColorName; ?></p>
+                            <img src="<?php echo $doorInternalFrameColorImageUrl; ?>" alt="<?php echo $doorInternalFrameColorName; ?>" data-internal-frame-color="<?php echo $doorInternalFrameColorName; ?>">
+                            <p><?php echo $doorInternalFrameColorName; ?></p>
                         </div>
                     <?php endforeach; ?>
 
@@ -114,12 +114,12 @@ $windowGlazingStyles = get_field('window_glazing_styles', 'options');
                 <h2>Handle Colour</h2>
                 <div class="grid">
 
-                    <?php foreach($windowHandleColors as $windowHandleColor): ?>
-                        <?php $windowHandleColorName = $windowHandleColor['window_handle_color']["window_handle_color_name"]; ?>
-                        <?php $windowHandleColorImageUrl = $windowHandleColor['window_handle_color']["window_handle_color_swatch"]['url']; ?>
+                    <?php foreach($doorHandleColors as $doorHandleColor): ?>
+                        <?php $doorHandleColorName = $doorHandleColor['door_handle_color']["door_handle_color_name"]; ?>
+                        <?php $doorHandleColorImageUrl = $doorHandleColor['door_handle_color']["door_handle_color_swatch"]['url']; ?>
                         <div class="handle-color">
-                            <img src="<?php echo $windowHandleColorImageUrl; ?>" alt="<?php echo $windowHandleColorName; ?>" data-handle-color="<?php echo $windowHandleColorName; ?>">
-                            <p><?php echo $windowHandleColorName; ?></p>
+                            <img src="<?php echo $doorHandleColorImageUrl; ?>" alt="<?php echo $doorHandleColorName; ?>" data-handle-color="<?php echo $doorHandleColorName; ?>">
+                            <p><?php echo $doorHandleColorName; ?></p>
                         </div>
                     <?php endforeach; ?>
 
@@ -139,12 +139,12 @@ $windowGlazingStyles = get_field('window_glazing_styles', 'options');
                 <h2>Glazing Style</h2>
                 <div class="grid">
 
-                <?php foreach($windowGlazingStyles as $windowGlazingStyle): ?>
-                        <?php $windowGlazingStyleName = $windowGlazingStyle['window_glazing_style']["window_glazing_style_name"]; ?>
-                        <?php $windowGlazingStyleImageUrl = $windowGlazingStyle['window_glazing_style']["window_glazing_style_image"]['url']; ?>
+                <?php foreach($doorGlazingStyles as $doorGlazingStyle): ?>
+                        <?php $doorGlazingStyleName = $doorGlazingStyle['door_glazing_style']["door_glazing_style_name"]; ?>
+                        <?php $doorGlazingStyleImageUrl = $doorGlazingStyle['door_glazing_style']["door_glazing_style_image"]['url']; ?>
                         <div class="glazing-style">
-                            <img src="<?php echo $windowGlazingStyleImageUrl; ?>" alt="<?php echo $windowGlazingStyleName; ?>" data-glazing-style="<?php echo $windowGlazingStyleName; ?>">
-                            <p><?php echo $windowGlazingStyleName; ?></p>
+                            <img src="<?php echo $doorGlazingStyleImageUrl; ?>" alt="<?php echo $doorGlazingStyleName; ?>" data-glazing-style="<?php echo $doorGlazingStyleName; ?>">
+                            <p><?php echo $doorGlazingStyleName; ?></p>
                         </div>
                     <?php endforeach; ?>
                     
@@ -162,7 +162,7 @@ $windowGlazingStyles = get_field('window_glazing_styles', 'options');
 
                 <div id="summary">
                     <h3>Your Quote Summary</h3>
-                    <p id="no-config-windows-msg">You have no configured Windows<br><span id="inline-begin">Click Here To Start</span></p>
+                    <p id="no-config-doors-msg">You have no configured doors<br><span id="inline-begin">Click Here To Start</span></p>
                 </div>
 
                 <form id="contact-form">
@@ -191,7 +191,7 @@ $windowGlazingStyles = get_field('window_glazing_styles', 'options');
 
 
                     <div class="button-container">
-                        <button id="configure-another-window">Configure Another Window</button>
+                        <button id="configure-another-door">Configure Another door</button>
                         <button class="submit-quote" type="submit">Submit</button>
                     </div>
                     
@@ -199,10 +199,10 @@ $windowGlazingStyles = get_field('window_glazing_styles', 'options');
             </div>
         </div>
 
-        <div class="image-side" style="background:url('<?php echo $windowQuoteEngineImage; ?>')">
+        <div class="image-side" style="background:url('<?php echo $doorQuoteEngineImage; ?>')">
             <div class="quote-engine-selector-container">
                 <a href="/window-quote-engine"><div class="quote-engine-tile">Add Windows To Your Quote</div></a>
-                <a href="/window-quote-engine"><div class="quote-engine-tile">Add Doors To Your Quote</div></a>
+                <a href="/door-quote-engine"><div class="quote-engine-tile">Add Doors To Your Quote</div></a>
                 <div class="quote-engine-tile">Add a Conservatory To Your Quote</div>
                 <div class="quote-engine-tile">Add Replacement Conservatory Roofing To Your Quote</div>
             </div>

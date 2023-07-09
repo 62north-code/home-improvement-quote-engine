@@ -3,11 +3,11 @@ const steps = document.querySelectorAll(".step");
 const nextButtons = document.querySelectorAll(".next");
 const prevButtons = document.querySelectorAll(".prev");
 const contactForm = document.getElementById("contact-form");
-let windowConfigurations = [];
+let doorConfigurations = [];
 
 let selectedOptions = {
 	id: Date.now(),
-	windowStyle: null,
+	doorStyle: null,
 	dimensionsWidth: null,
 	dimensionsHeight: null,
 	externalFrameColor: null,
@@ -18,29 +18,27 @@ let selectedOptions = {
 };
 
 window.addEventListener("load", () => {
-	checkWindowConfigurations(windowConfigurations);
-	const savedWindowConfigurations = localStorage.getItem(
-		"windowConfigurations"
-	);
+	checkdoorConfigurations(doorConfigurations);
+	const saveddoorConfigurations = localStorage.getItem("doorConfigurations");
 
-	if (savedWindowConfigurations) {
-		windowConfigurations = JSON.parse(savedWindowConfigurations);
+	if (saveddoorConfigurations) {
+		doorConfigurations = JSON.parse(saveddoorConfigurations);
 
-		// Display the loaded window configurations
-		windowConfigurations.forEach((config) => {
+		// Display the loaded door configurations
+		doorConfigurations.forEach((config) => {
 			// Create a new summary element for the loaded configuration
 			const summaryElement = document.createElement("div");
 			summaryElement.id = `summary-${config.id}`; // Set the element ID
 			summaryElement.innerHTML = `
-                Window ID: ${config.id}<br>
-                Window Style: ${config.windowStyle}<br>
-                Dimensions: ${config.dimensionsWidth} x ${config.dimensionsHeight} mm<br>
-                External Frame Color: ${config.externalFrameColor}<br>
-                Internal Frame Color: ${config.internalFrameColor}<br>
-                Handle Color: ${config.handleColor}<br>
-                Glazing Style: ${config.glazingStyle}<br>
-                <button class="edit-window" data-window-id="${config.id}">Edit</button>
-                <button class="remove-window" data-window-id="${config.id}">Remove</button>
+                Door ID: ${config.id}<br>
+                Door Style: ${config.doorStyle}<br>
+                Door Dimensions: ${config.dimensionsWidth} x ${config.dimensionsHeight} mm<br>
+                External Door Frame Color: ${config.externalFrameColor}<br>
+                Internal Door Frame Color: ${config.internalFrameColor}<br>
+                Door Handle Color: ${config.handleColor}<br>
+                Door Glazing Style: ${config.glazingStyle}<br>
+                <button class="edit-door" data-door-id="${config.id}">Edit</button>
+                <button class="remove-door" data-door-id="${config.id}">Remove</button>
                 <hr>
             `;
 
@@ -59,17 +57,17 @@ window.addEventListener("load", () => {
 	}
 });
 
-// Add click event listeners to window styles, frame colors, and glazing styles
-document.querySelectorAll(".window-style").forEach((el) => {
+// Add click event listeners to door styles, frame colors, and glazing styles
+document.querySelectorAll(".door-style").forEach((el) => {
 	el.addEventListener("click", () => {
 		document
-			.querySelectorAll(".window-style.selected")
+			.querySelectorAll(".door-style.selected")
 			.forEach((selected) => {
 				selected.classList.remove("selected");
 			});
 		el.classList.add("selected");
-		selectedOptions.windowStyle = el.querySelector("p").textContent;
-		console.log("Selected window style:", selectedOptions.windowStyle);
+		selectedOptions.doorStyle = el.querySelector("p").textContent;
+		console.log("Selected door style:", selectedOptions.doorStyle);
 	});
 });
 
@@ -156,8 +154,8 @@ prevButtons.forEach((button, index) => {
 });
 
 function resetForm() {
-	// Reset window style selection
-	document.querySelectorAll(".window-style.selected").forEach((selected) => {
+	// Reset door style selection
+	document.querySelectorAll(".door-style.selected").forEach((selected) => {
 		selected.classList.remove("selected");
 	});
 
@@ -201,8 +199,8 @@ function handleNextButtonClick(stepIndex) {
 	// Check if the required fields are filled before moving to the next step
 	switch (stepIndex) {
 		case 1:
-			if (!selectedOptions.windowStyle) {
-				validationMessage = "Please select a window style.";
+			if (!selectedOptions.doorStyle) {
+				validationMessage = "Please select a door style.";
 			}
 			break;
 		case 2:
@@ -246,26 +244,26 @@ function handleNextButtonClick(stepIndex) {
 			element.textContent = "";
 		});
 
-		// If the next step is the first step, it means a new window configuration is being started
+		// If the next step is the first step, it means a new door configuration is being started
 		if (stepIndex === 0) {
 			resetSelectedOptions();
-			// Push the completed window configuration to windowConfigurations array
+			// Push the completed door configuration to doorConfigurations array
 			if (selectedOptions.id !== null) {
-				const existingIndex = windowConfigurations.findIndex(
+				const existingIndex = doorConfigurations.findIndex(
 					(config) => config.id === selectedOptions.id
 				);
 				if (existingIndex >= 0) {
-					// Update the existing window configuration
-					windowConfigurations[existingIndex] = {
+					// Update the existing door configuration
+					doorConfigurations[existingIndex] = {
 						...selectedOptions
 					};
 				} else {
-					// Add the new window configuration
-					windowConfigurations.push({ ...selectedOptions });
+					// Add the new door configuration
+					doorConfigurations.push({ ...selectedOptions });
 				}
 			}
 
-			// Assign a new unique ID to the new window configuration
+			// Assign a new unique ID to the new door configuration
 			selectedOptions.id = Date.now();
 			resetForm();
 		}
@@ -274,9 +272,9 @@ function handleNextButtonClick(stepIndex) {
 	}
 }
 
-// Add a click event listener to the "Configure another window" button
+// Add a click event listener to the "Configure another door" button
 document
-	.getElementById("configure-another-window")
+	.getElementById("configure-another-door")
 	.addEventListener("click", () => {
 		handleNextButtonClick(0);
 	});
@@ -285,7 +283,7 @@ document.getElementById("inline-begin").addEventListener("click", () => {
 	handleNextButtonClick(0);
 });
 
-// Add a click event listener to the "Configure another window" button
+// Add a click event listener to the "Configure another door" button
 document
 	.getElementById("view-quote-summary-btn")
 	.addEventListener("click", () => {
@@ -315,33 +313,33 @@ function loadFormFields(options) {
 
 document.getElementById("next-step5").addEventListener("click", function () {
 	updateSummary();
-	checkWindowConfigurations(windowConfigurations);
+	checkdoorConfigurations(doorConfigurations);
 });
 
 function updateSummary() {
-	const windowId = selectedOptions.id; // Get the current window ID
+	const doorId = selectedOptions.id; // Get the current Door ID
 
-	// Check if the window configuration already exists in the array
-	const existingIndex = windowConfigurations.findIndex(
-		(config) => config.id === windowId
+	// Check if the door configuration already exists in the array
+	const existingIndex = doorConfigurations.findIndex(
+		(config) => config.id === doorId
 	);
 
 	if (existingIndex >= 0) {
-		// Update the existing window configuration
-		windowConfigurations[existingIndex] = { ...selectedOptions };
+		// Update the existing door configuration
+		doorConfigurations[existingIndex] = { ...selectedOptions };
 	} else {
-		// Add the new window configuration to the array
-		windowConfigurations.push({ ...selectedOptions });
+		// Add the new door configuration to the array
+		doorConfigurations.push({ ...selectedOptions });
 	}
 	const summaryElement = document.createElement("div");
 
-	summaryElement.id = `summary-${windowId}`; // Set the element ID
+	summaryElement.id = `summary-${doorId}`; // Set the element ID
 	summaryElement.innerHTML = `
 
     <span class="hidden-id">${
-		windowId !== null ? `Window ID: ${windowId}<br>` : ""
+		doorId !== null ? `Door ID: ${doorId}<br>` : ""
 	}</span>
-    Window Style: ${selectedOptions.windowStyle}<br>
+    door Style: ${selectedOptions.doorStyle}<br>
     Dimensions: ${selectedOptions.dimensionsWidth} mm x ${
 		selectedOptions.dimensionsHeight
 	} mm<br>
@@ -350,13 +348,13 @@ function updateSummary() {
     Handle Color: ${selectedOptions.handleColor}<br>
     Glazing Style: ${selectedOptions.glazingStyle}<br>
 
-    <button class="edit-window" data-window-id="${windowId}">Edit</button>
-    <button class="remove-window" data-window-id="${windowId}">Remove</button>
+    <button class="edit-door" data-door-id="${doorId}">Edit</button>
+    <button class="remove-door" data-door-id="${doorId}">Remove</button>
     <hr>
   `;
 
 	// Check if a summary with the same ID already exists
-	const existingSummary = document.getElementById(`summary-${windowId}`);
+	const existingSummary = document.getElementById(`summary-${doorId}`);
 	if (existingSummary) {
 		// If a summary with the same ID exists, replace it with the new summary
 		existingSummary.replaceWith(summaryElement);
@@ -365,38 +363,38 @@ function updateSummary() {
 		document.getElementById("summary").appendChild(summaryElement);
 	}
 
-	// Save the windowConfigurations to localStorage
+	// Save the doorConfigurations to localStorage
 	localStorage.setItem(
-		"windowConfigurations",
-		JSON.stringify(windowConfigurations)
+		"doorConfigurations",
+		JSON.stringify(doorConfigurations)
 	);
 }
 
 document.getElementById("summary").addEventListener("click", function (event) {
 	// If an 'Edit' button was clicked
-	if (event.target.matches("button.edit-window")) {
-		const windowId = event.target.dataset.windowId;
-		editWindow(windowId);
+	if (event.target.matches("button.edit-door")) {
+		const doorId = event.target.dataset.doorId;
+		editdoor(doorId);
 	}
 
 	// If a 'Remove' button was clicked
-	else if (event.target.matches("button.remove-window")) {
-		const windowId = event.target.dataset.windowId;
-		removeWindow(windowId);
+	else if (event.target.matches("button.remove-door")) {
+		const doorId = event.target.dataset.doorId;
+		removedoor(doorId);
 	}
 });
 
 document.addEventListener("DOMContentLoaded", function () {
-	document.querySelectorAll(".window-style img").forEach((img) => {
+	document.querySelectorAll(".door-style img").forEach((img) => {
 		img.addEventListener("click", (event) => {
-			// Get the window style from the clicked image
-			const windowStyle = event.target.dataset.windowStyle;
+			// Get the door style from the clicked image
+			const doorStyle = event.target.dataset.doorStyle;
 
-			// Update the selectedOptions with the clicked window style
-			selectedOptions.windowStyle = windowStyle;
+			// Update the selectedOptions with the clicked door style
+			selectedOptions.doorStyle = doorStyle;
 
 			// Log the updated selectedOptions
-			console.log("Selected window style:", selectedOptions.windowStyle);
+			console.log("Selected door style:", selectedOptions.doorStyle);
 		});
 	});
 });
@@ -404,10 +402,10 @@ document.addEventListener("DOMContentLoaded", function () {
 document.addEventListener("DOMContentLoaded", function () {
 	document.querySelectorAll(".external-frame-color img").forEach((img) => {
 		img.addEventListener("click", (event) => {
-			// Get the window style from the clicked image
-			const externalFrameColor = event.target.dataset.windowStyle;
+			// Get the door style from the clicked image
+			const externalFrameColor = event.target.dataset.doorStyle;
 
-			// Update the selectedOptions with the clicked window style
+			// Update the selectedOptions with the clicked door style
 			selectedOptions.externalFrameColor = externalFrameColor;
 
 			// Log the updated selectedOptions
@@ -422,10 +420,10 @@ document.addEventListener("DOMContentLoaded", function () {
 document.addEventListener("DOMContentLoaded", function () {
 	document.querySelectorAll(".internal-frame-color img").forEach((img) => {
 		img.addEventListener("click", (event) => {
-			// Get the window style from the clicked image
-			const internalFrameColor = event.target.dataset.windowStyle;
+			// Get the door style from the clicked image
+			const internalFrameColor = event.target.dataset.doorStyle;
 
-			// Update the selectedOptions with the clicked window style
+			// Update the selectedOptions with the clicked door style
 			selectedOptions.internalFrameColor = internalFrameColor;
 
 			// Log the updated selectedOptions
@@ -437,32 +435,32 @@ document.addEventListener("DOMContentLoaded", function () {
 	});
 });
 
-function editWindow(windowId) {
-	// Convert windowId to a number
-	windowId = Number(windowId);
+function editdoor(doorId) {
+	// Convert doorId to a number
+	doorId = Number(doorId);
 
-	// Find the window configuration by ID
-	const windowConfig = windowConfigurations.find(
-		(config) => Number(config.id) === windowId
+	// Find the door configuration by ID
+	const doorConfig = doorConfigurations.find(
+		(config) => Number(config.id) === doorId
 	);
 
-	// If a window configuration was found, load it into selectedOptions
-	if (windowConfig) {
-		selectedOptions = { ...windowConfig };
+	// If a door configuration was found, load it into selectedOptions
+	if (doorConfig) {
+		selectedOptions = { ...doorConfig };
 
-		// Get all window style images
-		const windowStyleImages = document.querySelectorAll(
-			"img[data-window-style]"
+		// Get all door style images
+		const doorStyleImages = document.querySelectorAll(
+			"img[data-door-style]"
 		);
 
-		// Remove 'selected' class from all window style divs
-		windowStyleImages.forEach((img) => {
+		// Remove 'selected' class from all door style divs
+		doorStyleImages.forEach((img) => {
 			img.parentNode.classList.remove("selected");
 		});
 
-		// Loop over images and add 'selected' class to the div that matches the window style in selectedOptions
-		windowStyleImages.forEach((img) => {
-			if (img.dataset.windowStyle === selectedOptions.windowStyle) {
+		// Loop over images and add 'selected' class to the div that matches the door style in selectedOptions
+		doorStyleImages.forEach((img) => {
+			if (img.dataset.doorStyle === selectedOptions.doorStyle) {
 				img.parentNode.classList.add("selected");
 			}
 		});
@@ -542,16 +540,12 @@ function editWindow(windowId) {
 		});
 
 		// Log that the configuration has been loaded
-		console.log(
-			`Loaded window configuration with ID ${windowId} for editing.`
-		);
+		console.log(`Loaded door configuration with ID ${doorId} for editing.`);
 
 		// Navigate to the first step
 		showStep(0);
 	} else {
-		console.error(
-			`Could not find window configuration with ID ${windowId}`
-		);
+		console.error(`Could not find door configuration with ID ${doorId}`);
 	}
 }
 
@@ -569,82 +563,77 @@ function updateSelection(attribute, option) {
 	});
 }
 
-function removeWindow(windowId) {
-	// Convert windowId to a number
-	windowId = Number(windowId);
+function removedoor(doorId) {
+	// Convert doorId to a number
+	doorId = Number(doorId);
 
-	// Find the window configuration by ID
-	const windowConfigIndex = windowConfigurations.findIndex(
-		(config) => Number(config.id) === windowId
+	// Find the door configuration by ID
+	const doorConfigIndex = doorConfigurations.findIndex(
+		(config) => Number(config.id) === doorId
 	);
 
-	// If a window configuration was found, remove it from the array
-	if (windowConfigIndex >= 0) {
-		windowConfigurations.splice(windowConfigIndex, 1);
+	// If a door configuration was found, remove it from the array
+	if (doorConfigIndex >= 0) {
+		doorConfigurations.splice(doorConfigIndex, 1);
 
-		// Reset the selected options if the removed window was the last selected one
-		if (selectedOptions.id === windowId) {
+		// Reset the selected options if the removed door was the last selected one
+		if (selectedOptions.id === doorId) {
 			resetSelectedOptions();
 		}
 
 		// Log that the configuration has been removed
-		console.log(
-			`Window configuration with ID ${windowId} has been removed.`
-		);
+		console.log(`door configuration with ID ${doorId} has been removed.`);
 
-		// Save the updated window configurations to localStorage
+		// Save the updated door configurations to localStorage
 		localStorage.setItem(
-			"windowConfigurations",
-			JSON.stringify(windowConfigurations)
+			"doorConfigurations",
+			JSON.stringify(doorConfigurations)
 		);
 	} else {
-		console.error(
-			`Could not find window configuration with ID ${windowId}`
-		);
+		console.error(`Could not find door configuration with ID ${doorId}`);
 	}
 
 	// Remove the corresponding summary element
-	const summaryElement = document.getElementById(`summary-${windowId}`);
+	const summaryElement = document.getElementById(`summary-${doorId}`);
 	if (summaryElement) {
 		summaryElement.remove();
 	}
 
-	// Log the updated window configurations
-	console.log("Updated window configurations:", windowConfigurations);
-	checkWindowConfigurations(windowConfigurations);
+	// Log the updated door configurations
+	console.log("Updated door configurations:", doorConfigurations);
+	checkdoorConfigurations(doorConfigurations);
 }
 
-function checkWindowConfigurations(windowConfigurations) {
-	if (windowConfigurations.length === 0) {
-		document.getElementById("no-config-windows-msg").style.display =
-			"block";
+function checkdoorConfigurations(doorConfigurations) {
+	if (doorConfigurations.length === 0) {
+		document.getElementById("no-config-doors-msg").style.display = "block";
 		//console.log("warning visible");
 		document.getElementById("view-quote-summary-btn").style.display =
 			"none";
 		//console.log("button hidden");
-		document.getElementById("configure-another-window").style.display =
+		document.getElementById("configure-another-door").style.display =
 			"none";
 		//console.log("configure more button hidden");
 	} else {
-		document.getElementById("no-config-windows-msg").style.display = "none";
+		document.getElementById("no-config-doors-msg").style.display = "none";
 		//console.log("warning hidden");
 		document.getElementById("view-quote-summary-btn").style.display =
 			"block";
 		//console.log("button visible");
-		document.getElementById("configure-another-window").style.display =
+		document.getElementById("configure-another-door").style.display =
 			"block";
 		//console.log("configure more button visable");
 	}
 }
 
 window.addEventListener("load", (event) => {
-	checkWindowConfigurations(windowConfigurations);
+	checkdoorConfigurations(doorConfigurations);
 });
 
 function resetSelectedOptions() {
 	selectedOptions = {
 		id: null,
-		windowStyle: null,
+		doorStyle: null,
 		dimensionsWidth: null,
 		dimensionsHeight: null,
 		externalFrameColor: null,
@@ -669,29 +658,29 @@ contactForm.addEventListener("submit", (e) => {
 	// Log all selected options
 	console.log("All selected options:", selectedOptions);
 
-	// Check if the window configuration already exists
-	const existingIndex = windowConfigurations.findIndex(
+	// Check if the door configuration already exists
+	const existingIndex = doorConfigurations.findIndex(
 		(config) => config.id === selectedOptions.id
 	);
 	if (existingIndex >= 0) {
-		// Update the existing window configuration
-		windowConfigurations[existingIndex] = { ...selectedOptions };
+		// Update the existing door configuration
+		doorConfigurations[existingIndex] = { ...selectedOptions };
 	} else {
-		// Add the new window configuration
-		windowConfigurations.push({ ...selectedOptions });
+		// Add the new door configuration
+		doorConfigurations.push({ ...selectedOptions });
 	}
 
-	// Format window configurations into a nicely formatted message
-	const message = windowConfigurations
+	// Format door configurations into a nicely formatted message
+	const message = doorConfigurations
 		.map((config) => {
 			return `
-      Window ID: ${config.id}<br>
-      Window Style: ${config.windowStyle}<br>
-      Dimensions: ${config.dimensionsWidth} x ${config.dimensionsHeight} mm<br>
-      External Frame Color: ${config.externalFrameColor}<br>
-      Internal Frame Color: ${config.internalFrameColor}<br>
-      Handle Color: ${config.handleColor}<br>
-      Glazing Style: ${config.glazingStyle}<br>
+      Door ID: ${config.id}<br>
+      Door Style: ${config.doorStyle}<br>
+      Door Dimensions: ${config.dimensionsWidth} x ${config.dimensionsHeight} mm<br>
+      External Door Frame Color: ${config.externalFrameColor}<br>
+      Internal Door Frame Color: ${config.internalFrameColor}<br>
+      Door Handle Color: ${config.handleColor}<br>
+      Door Glazing Style: ${config.glazingStyle}<br>
       <hr>
     `;
 		})
@@ -703,12 +692,12 @@ contactForm.addEventListener("submit", (e) => {
 			"service_2unt24a",
 			"template_o9wu516",
 			{
-				type: "Window",
+				type: "door",
 				name: selectedOptions.userInfo.name,
 				email: selectedOptions.userInfo.email,
 				phone: selectedOptions.userInfo.phone,
 				postcode: selectedOptions.userInfo.postcode,
-				message: message // Insert the window configurations into the message
+				message: message // Insert the door configurations into the message
 			},
 			"SMAtirpg6hG7wZzBt"
 		)
@@ -720,11 +709,11 @@ contactForm.addEventListener("submit", (e) => {
 					response.text
 				);
 				// After a successful email send, clear the localStorage and reset arrays and objects
-				localStorage.removeItem("windowConfigurations"); // Clear localStorage
-				windowConfigurations.splice(0, windowConfigurations.length); // Clear array
+				localStorage.removeItem("doorConfigurations"); // Clear localStorage
+				doorConfigurations.splice(0, doorConfigurations.length); // Clear array
 				resetSelectedOptions(); // Clear selectedOptions object
 				// Redirect to a new page
-				window.location.href = "/success";
+				door.location.href = "/success";
 			},
 			function (error) {
 				console.log("Failed...", error);

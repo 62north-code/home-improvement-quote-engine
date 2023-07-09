@@ -75,8 +75,8 @@ body, html, button, input {
 }
 
 .window-style img, .glazing-style img, .handle-color img, .external-frame-color img, .internal-frame-color img {
-  width: 100px;
-  height: 100px;
+  max-width: 100px;
+  max-height: 100px;
   object-fit: contain;
   border-radius: 4px;
 }
