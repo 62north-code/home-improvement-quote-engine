@@ -18,7 +18,7 @@ let selectedOptions = {
 };
 
 window.addEventListener("load", () => {
-	checkExistingConfigurations(doorConfigurations);
+	checkdoorConfigurations(doorConfigurations);
 	const saveddoorConfigurations = localStorage.getItem("doorConfigurations");
 
 	if (saveddoorConfigurations) {
@@ -312,7 +312,8 @@ function loadFormFields(options) {
 // Add a click event listener to update the summary when the button is clicked
 
 document.getElementById("next-step5").addEventListener("click", function () {
-	updateSummary()Existing(doorConfigurations);
+	updateSummary();
+	checkdoorConfigurations(doorConfigurations);
 });
 
 function updateSummary() {
@@ -599,10 +600,11 @@ function removedoor(doorId) {
 	}
 
 	// Log the updated door configurations
-	console.log("Updated door configurations:", doorConfigurations)Existing(doorConfigurations);
+	console.log("Updated door configurations:", doorConfigurations);
+	checkdoorConfigurations(doorConfigurations);
 }
 
-functiExisting(doorConfigurations) {
+function checkdoorConfigurations(doorConfigurations) {
 	if (doorConfigurations.length === 0) {
 		document.getElementById("no-config-doors-msg").style.display = "block";
 		//console.log("warning visible");
@@ -624,7 +626,8 @@ functiExisting(doorConfigurations) {
 	}
 }
 
-window.addEventListener("load", (event) => Existing(doorConfigurations);
+window.addEventListener("load", (event) => {
+	checkdoorConfigurations(doorConfigurations);
 });
 
 function resetSelectedOptions() {

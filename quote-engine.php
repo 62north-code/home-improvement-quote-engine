@@ -34,9 +34,17 @@ function engine_script_handler() {
         // enqueue the script
         wp_enqueue_script('door-engine');
     }
+
+    if (is_page('submit-quote')) {
+        // register your script location, dependencies and version
+        wp_enqueue_script('submit-quote', plugin_dir_url(__FILE__) . 'js/submit-quote.js', array('jquery'), '', true);
+        // enqueue the script
+        wp_enqueue_script('submit-quote');
+    }
 }
 add_action('wp_enqueue_scripts', 'engine_script_handler');
 
+// Window Builder Shortcode
 function product_configuration_app_shortcode_window() {
     
     include 'designers/window-quote-engine.php';
@@ -44,12 +52,21 @@ function product_configuration_app_shortcode_window() {
 }
 add_shortcode('window_quote_engine', 'product_configuration_app_shortcode_window');
 
+// Door Builder Shortcode
 function product_configuration_app_shortcode_door() {
     
     include 'designers/door-quote-engine.php';
 
 }
 add_shortcode('door_quote_engine', 'product_configuration_app_shortcode_door');
+
+// Submit Quote Shortcode
+function product_configuration_app_shortcode_submit_quote() {
+    
+    include 'designers/quote-submit-engine.php';
+
+}
+add_shortcode('submit_quote_engine', 'product_configuration_app_shortcode_submit_quote');
 
 
 if (function_exists('acf_add_local_field_group')) {

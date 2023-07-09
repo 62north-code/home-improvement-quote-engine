@@ -205,6 +205,9 @@ $windowGlazingStyles = get_field('window_glazing_styles', 'options');
                 <a href="/door-quote-engine"><div class="quote-engine-tile">Add Doors To Your Quote</div></a>
                 <div class="quote-engine-tile">Add a Conservatory To Your Quote</div>
                 <div class="quote-engine-tile">Add Replacement Conservatory Roofing To Your Quote</div>
+                <a href="/submit-quote">
+                <div class="quote-engine-tile tile-full">SUBMIT QUOTE</div>
+            </a>
             </div>
         </div>
     </div>
