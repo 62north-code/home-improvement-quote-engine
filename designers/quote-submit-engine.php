@@ -5,6 +5,40 @@ $windowQuoteEngineImage = get_field('window_quote_engine_main_image', 'options')
 <div class="container">
     <div class="calculator-container">
         <div id="output-container"></div>
+
+        <form id="contact-form">
+                   
+                <div class="form-inline-container">
+                    <div class="form-field">
+                        <label for="name">Name:</label>
+                        <input type="text" id="name" name="name" class="form-input-half" placeholder="Name" required>
+                    </div>
+                    <div class="form-field">
+                        <label label for="email">Email:</label>
+                        <input type="email" id="email" name="email" class="form-input-half" placeholder="Email" required>
+                    </div>
+                </div>
+                <div class="form-inline-container">
+                    <div class="form-field">
+                        <label for="phone">Phone:</label>
+                        <input type="tel" id="phone" name="phone" class="form-input-whole" placeholder="Phone" required>
+                    </div>
+                    <div class="form-field">
+                        <label for="postcode">Postcode:</label>
+                        <input type="text" id="postcode" name="postcode" class="form-input-whole" placeholder="Postcode" required>
+                    </div>
+
+                </div>
+
+                <input type="hidden" id="windowConfigurations" name="windowConfigurations">
+                <input type="hidden" id="doorConfigurations" name="doorConfigurations">
+
+
+                    <div class="button-container">
+                        <button class="submit-quote" type="submit">Submit</button>
+                    </div>
+                    
+                </form>
     </div>
 
     <div class="image-side" style="background:url('<?php echo $windowQuoteEngineImage; ?>')">
